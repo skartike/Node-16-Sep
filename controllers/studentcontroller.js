@@ -14,15 +14,23 @@ async function addStudent(req, res){
 }
 async function getStudents(req, res){
     try{
-       let students = await Student.find({});
+        let rollNo = (req.params.rollNo);
+        console.log(rollNo, 'rollNo')
+       let students = await Student.findOne({rollno: rollNo});
        console.log(students, 'students');
        res.send(students)
     } catch(err) {
-
+          console.log(err, 'err')
     }
 }
-
-module.exports = {
-    addStudent,
-    getStudents
-}
+async function getStudentByRollNo(req, res){
+    try{
+        let rollNo = (req.params.rollNo);
+        console.log("Fetching student with rollNo: ", rollNo);
+       let student = await Student.findOne({rollno: rollNo});
+       console.log(student, "student");
+       res.send(student);
+    } catch(err) {
+          console.log(err, 'err')
+    }
+}5
